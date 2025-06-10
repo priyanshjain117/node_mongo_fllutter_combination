@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const users = require('./models/user');
 
-const mongoURI = "mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority";
 const PORT =3000;
 
 const app = express();
@@ -15,6 +15,18 @@ mongoose.connect(process.env.MONGODB_URI)
 
 app.get('/', (req, res) => {
     res.status(200).json({ msg: 'Hello from Node.js with MongoDB Atlas!' },);
+});
+
+app.post('/user',async (req,res)=>{
+    const {name , email}=req.body;
+    console.log("post");
+    console.log(name);
+    console.log(email);
+    const user =await users.create({
+        name,
+        email
+    })
+    res.status(200).json({msg:"success"});
 });
 
 app.listen(PORT,()=>{
