@@ -28,8 +28,9 @@ To build a basic full-stack app where:
 ## 🗂️ Folder Structure
 
 your-repo/
-├── backend/ ← Node.js backend project
-└── flutter_app/ ← Flutter frontend app
+├── backend/ # Node.js backend project
+└── flutter_app/ # Flutter frontend app
+
 
 
 ## 🚀 What's Next
