@@ -26,11 +26,11 @@ To build a basic full-stack app where:
 - ✅ Future-ready for deployment (Render, Vercel, etc.)
 
 ## 🗂️ Folder Structure
-
+```
 your-repo/
 ├── backend/ # Node.js backend project
 └── flutter_app/ # Flutter frontend app
-
+```
 
 
 ## 🚀 What's Next
