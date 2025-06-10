@@ -1,13 +1,16 @@
+// ignore_for_file: must_be_immutable, unused_element
+
 import 'dart:convert';
 
 import 'package:demo_app/screens/list_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+
 class HomeScreen extends StatelessWidget {
-    HomeScreen({super.key});
-    String name='';
-    String email='';
+  HomeScreen({super.key});
+  String name = '';
+  String email = '';
 
   Future<void> _connectingToBackend() async {
     const url = 'http://localhost:3000/';
@@ -26,15 +29,24 @@ class HomeScreen extends StatelessWidget {
       body: json.encode({'name': name, 'email': email}),
     );
 
-      final Map<String, dynamic> jsonData = json.decode(response.body);
-      print(jsonData['msg']);
-      print(jsonData['user']['name']);
+    final Map<String, dynamic> jsonData = json.decode(response.body);
+    print(jsonData['msg']);
+    print(jsonData['user']['name']);
+  }
+
+  Future<dynamic> _loadData() async {
+    const url = 'http://localhost:3000/user';
+    final response= await http.get(
+      Uri.parse(url),
+    );
+    print(response.statusCode);
+    final jsonData=json.decode(response.body);
+    return jsonData['users'];
     
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -81,15 +93,21 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Colors.orange),
+                      style:
+                          TextButton.styleFrom(backgroundColor: Colors.orange),
                       onPressed: _postRequestCheck,
                       child: const Text("submit"),
                     ),
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Colors.orange),
-                      onPressed: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>ListUserScreen(),
-                        ),);
+                      style:
+                          TextButton.styleFrom(backgroundColor: Colors.orange),
+                      onPressed: () async {
+                        final users=await _loadData();
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (ctx) => ListUserScreen(users: users,),
+                          ),
+                        );
                       },
                       child: const Text("List all users"),
                     ),
