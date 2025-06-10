@@ -15,7 +15,7 @@ To build a basic full-stack app where:
 | Frontend     | Flutter, Dart, `http` package    |
 | Backend      | Node.js, Express.js, MongoDB     |
 | Database     | MongoDB Atlas (Cloud)            |
-| Tools Used   | Postman (API testing), Compass (MongoDB GUI), Nodemon |
+| Tools Used   | Postman (API testing), Nodemon |
 
 ## ⚙️ Features
 
